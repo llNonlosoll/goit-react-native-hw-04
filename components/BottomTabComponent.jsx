@@ -42,10 +42,11 @@ export const BottomTabComponent = () => {
         tabBarStyle: {
           height: 83,
           paddingTop: 9,
+          paddingBottom: 22,
           paddingLeft: 82,
           paddingRight: 82,
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "flex-start",
         },
 
         headerShown: true,
