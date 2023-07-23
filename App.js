@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useFonts } from "expo-font";
+import "react-native-gesture-handler";
 
 import { LoginScreen } from "./screens/LoginScreen";
 import { RegistrationScreen } from "./screens/RegistrationScreen";
