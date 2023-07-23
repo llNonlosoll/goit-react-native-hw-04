@@ -28,6 +28,8 @@ export const RegistrationScreen = () => {
   const navigation = useNavigation();
 
   const handleSubmit = () => {
+    console.log({ login, email, password });
+
     navigation.navigate("Home");
 
     setLogin("");

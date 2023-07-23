@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
   Text,
@@ -6,7 +8,14 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Keyboard,
+  ImageBackground,
+  TouchableWithoutFeedback,
 } from "react-native";
+
+import { globalStyles } from "../components/styles/globalStyles";
+
+import { BackgroundComponent } from "../components/BackgroundComponent";
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +23,13 @@ export const LoginScreen = () => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
+  const navigation = useNavigation();
+
   const handleSubmit = () => {
     console.log({ email, password });
+
+    navigation.navigate("Home");
+
     setEmail("");
     setPassword("");
   };
@@ -25,72 +39,83 @@ export const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
-      <View style={{ flex: 1, justifyContent: "flex-end" }}>
-        <View
-          style={[
-            styles.formWrapper,
-            {
-              paddingBottom: isKeyboardVisible ? 32 : 111,
-              height: isKeyboardVisible ? 248 : "auto",
-            },
-          ]}
-        >
-          <Text style={styles.title}>Увійти</Text>
-          <TextInput
-            style={[styles.commonText, styles.input]}
-            placeholder="Адреса електронної пошти"
-            textContentType="emailAddress"
-            value={email}
-            onChangeText={setEmail}
-            onFocus={() => setIsKeyboardVisible(true)}
-            onBlur={() => setIsKeyboardVisible(false)}
-          ></TextInput>
-          <View>
-            <TextInput
-              style={[styles.commonText, styles.input]}
-              placeholder="Пароль"
-              textContentType="password"
-              value={password}
-              onChangeText={setPassword}
-              onFocus={() => setIsKeyboardVisible(true)}
-              onBlur={() => setIsKeyboardVisible(false)}
-              secureTextEntry={isPasswordHidden}
-            />
-            <TouchableOpacity
-              style={styles.showPasswordButton}
-              onPress={togglePassword}
-            >
-              {password !== "" && (
-                <Text>{isPasswordHidden ? "Показати" : "Сховати"}</Text>
-              )}
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={[styles.commonText, styles.buttonText]}>Увійти</Text>
-          </TouchableOpacity>
-          <View style={styles.signInContainer}>
-            <Text style={[styles.commonText, styles.signInText]}>
-              Немає акаунту?{" "}
-            </Text>
-            <TouchableOpacity>
-              <Text
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={globalStyles.container}>
+        <BackgroundComponent>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{ flex: 1 }}
+          >
+            <View style={{ flex: 1, justifyContent: "flex-end" }}>
+              <View
                 style={[
-                  styles.commonText,
-                  styles.signInText,
-                  styles.signInLink,
+                  styles.formWrapper,
+                  {
+                    paddingBottom: isKeyboardVisible ? 32 : 111,
+                    height: isKeyboardVisible ? 248 : "auto",
+                  },
                 ]}
               >
-                Зареєструватися
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+                <Text style={styles.title}>Увійти</Text>
+                <TextInput
+                  style={[styles.commonText, styles.input]}
+                  placeholder="Адреса електронної пошти"
+                  textContentType="emailAddress"
+                  value={email}
+                  onChangeText={setEmail}
+                  onFocus={() => setIsKeyboardVisible(true)}
+                  onBlur={() => setIsKeyboardVisible(false)}
+                ></TextInput>
+                <View>
+                  <TextInput
+                    style={[styles.commonText, styles.input]}
+                    placeholder="Пароль"
+                    textContentType="password"
+                    value={password}
+                    onChangeText={setPassword}
+                    onFocus={() => setIsKeyboardVisible(true)}
+                    onBlur={() => setIsKeyboardVisible(false)}
+                    secureTextEntry={isPasswordHidden}
+                  />
+                  <TouchableOpacity
+                    style={styles.showPasswordButton}
+                    onPress={togglePassword}
+                  >
+                    {password !== "" && (
+                      <Text>{isPasswordHidden ? "Показати" : "Сховати"}</Text>
+                    )}
+                  </TouchableOpacity>
+                </View>
+                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                  <Text style={[styles.commonText, styles.buttonText]}>
+                    Увійти
+                  </Text>
+                </TouchableOpacity>
+                <View style={styles.signInContainer}>
+                  <Text style={[styles.commonText, styles.signInText]}>
+                    Немає акаунту?{" "}
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Registration")}
+                  >
+                    <Text
+                      style={[
+                        styles.commonText,
+                        styles.signInText,
+                        styles.signInLink,
+                      ]}
+                    >
+                      Зареєструватися
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+        </BackgroundComponent>
+        <StatusBar style="auto" />
       </View>
-    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 const styles = StyleSheet.create({
