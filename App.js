@@ -1,16 +1,11 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  Keyboard,
-  TouchableWithoutFeedback,
-} from "react-native";
 import { useFonts } from "expo-font";
 import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import { LoginScreen } from "./screens/LoginScreen";
 import { RegistrationScreen } from "./screens/RegistrationScreen";
+import { Home } from "./screens/Home";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,31 +17,45 @@ export default function App() {
     return null;
   }
 
+  const MainStack = createStackNavigator();
+
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <ImageBackground
-          source={require("./assets/images/background.jpg")}
-          resizeMode="cover"
-          style={styles.backgroundImg}
-        >
-          {/* <LoginScreen /> */}
-          <RegistrationScreen />
-        </ImageBackground>
-        <StatusBar style="auto" />
-      </View>
-    </TouchableWithoutFeedback>
+    <NavigationContainer>
+      <MainStack.Navigator initialRouteName="Registration">
+        <MainStack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="Registration"
+          component={RegistrationScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {/* <MainStack.Screen
+          name="Comments"
+          component={CommentsScreen}
+          options={{
+            title: "Коментарі",
+            headerShown: true,
+            headerLeft: () => <BackButton />,
+            headerStyle: {
+              borderBottomWidth: 1,
+            },
+          }}
+        /> */}
+      </MainStack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  backgroundImg: {
-    flex: 1,
-    justifyContent: "flex-end",
-    // alignItems: "center",
-  },
-});

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
   Text,
@@ -6,7 +8,15 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
+
+import { globalStyles } from "../components/styles/globalStyles";
+
+import { BackgroundComponent } from "../components/BackgroundComponent";
+
+import { AddIcon } from "../components/icons/icons";
 
 export const RegistrationScreen = () => {
   const [login, setLogin] = useState("");
@@ -15,8 +25,11 @@ export const RegistrationScreen = () => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
+  const navigation = useNavigation();
+
   const handleSubmit = () => {
-    console.log({ login, email, password });
+    navigation.navigate("Home");
+
     setLogin("");
     setEmail("");
     setPassword("");
@@ -27,80 +40,87 @@ export const RegistrationScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
-      <View style={{ flex: 1, justifyContent: "flex-end" }}>
-        <View
-          style={[
-            styles.formWrapper,
-            {
-              paddingBottom: isKeyboardVisible ? 32 : 78,
-              height: isKeyboardVisible ? 374 : "auto",
-            },
-          ]}
-        >
-          <View style={styles.userPhoto}>
-            <TouchableOpacity style={styles.addPhoto}>
-              <Text style={styles.addPhotoButton}>+</Text>
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.title}>Реєстрація</Text>
-          <TextInput
-            style={[styles.commonText, styles.input]}
-            placeholder="Логін"
-            textContentType="username"
-            value={login}
-            onChangeText={setLogin}
-            onFocus={() => setIsKeyboardVisible(true)}
-            onBlur={() => setIsKeyboardVisible(false)}
-          ></TextInput>
-          <TextInput
-            style={[styles.commonText, styles.input]}
-            placeholder="Адреса електронної пошти"
-            textContentType="emailAddress"
-            value={email}
-            onChangeText={setEmail}
-            onFocus={() => setIsKeyboardVisible(true)}
-            onBlur={() => setIsKeyboardVisible(false)}
-          ></TextInput>
-          <View>
-            <TextInput
-              style={[styles.commonText, styles.input]}
-              placeholder="Пароль"
-              textContentType="password"
-              value={password}
-              onChangeText={setPassword}
-              onFocus={() => setIsKeyboardVisible(true)}
-              onBlur={() => setIsKeyboardVisible(false)}
-              secureTextEntry={isPasswordHidden}
-            />
-            <TouchableOpacity
-              style={styles.showPasswordButton}
-              onPress={togglePassword}
-            >
-              {password !== "" && (
-                <Text>{isPasswordHidden ? "Показати" : "Сховати"}</Text>
-              )}
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.button}>
-            <Text
-              style={[styles.commonText, styles.buttonText]}
-              onPress={handleSubmit}
-            >
-              Зареєстуватися
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={[styles.commonText, styles.loginLink]}>
-              Вже є акаунт? Увійти
-            </Text>
-          </TouchableOpacity>
-        </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={globalStyles.container}>
+        <BackgroundComponent>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{ flex: 1 }}
+          >
+            <View style={{ flex: 1, justifyContent: "flex-end" }}>
+              <View
+                style={[
+                  styles.formWrapper,
+                  {
+                    paddingBottom: isKeyboardVisible ? 32 : 78,
+                    height: isKeyboardVisible ? 374 : "auto",
+                  },
+                ]}
+              >
+                <View style={styles.userPhoto}>
+                  <TouchableOpacity style={styles.addPhoto}>
+                    <AddIcon fill={"#FF6C00"} />
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.title}>Реєстрація</Text>
+                <TextInput
+                  style={[styles.commonText, styles.input]}
+                  placeholder="Логін"
+                  textContentType="username"
+                  value={login}
+                  onChangeText={setLogin}
+                  onFocus={() => setIsKeyboardVisible(true)}
+                  onBlur={() => setIsKeyboardVisible(false)}
+                ></TextInput>
+                <TextInput
+                  style={[styles.commonText, styles.input]}
+                  placeholder="Адреса електронної пошти"
+                  textContentType="emailAddress"
+                  value={email}
+                  onChangeText={setEmail}
+                  onFocus={() => setIsKeyboardVisible(true)}
+                  onBlur={() => setIsKeyboardVisible(false)}
+                ></TextInput>
+                <View>
+                  <TextInput
+                    style={[styles.commonText, styles.input]}
+                    placeholder="Пароль"
+                    textContentType="password"
+                    value={password}
+                    onChangeText={setPassword}
+                    onFocus={() => setIsKeyboardVisible(true)}
+                    onBlur={() => setIsKeyboardVisible(false)}
+                    secureTextEntry={isPasswordHidden}
+                  />
+                  <TouchableOpacity
+                    style={styles.showPasswordButton}
+                    onPress={togglePassword}
+                  >
+                    {password !== "" && (
+                      <Text>{isPasswordHidden ? "Показати" : "Сховати"}</Text>
+                    )}
+                  </TouchableOpacity>
+                </View>
+                <TouchableOpacity style={styles.button}>
+                  <Text
+                    style={[styles.commonText, styles.buttonText]}
+                    onPress={handleSubmit}
+                  >
+                    Зареєстуватися
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                  <Text style={[styles.commonText, styles.loginLink]}>
+                    Вже є акаунт? Увійти
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+        </BackgroundComponent>
+        <StatusBar style="auto" />
       </View>
-    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 const styles = StyleSheet.create({
@@ -138,7 +158,7 @@ const styles = StyleSheet.create({
   addPhoto: {
     position: "absolute",
     top: 81,
-    right: -12.5,
+    left: 107,
 
     justifyContent: "center",
     alignItems: "center",
@@ -149,10 +169,6 @@ const styles = StyleSheet.create({
     borderColor: "#FF6C00",
     borderRadius: 12.5,
     borderWidth: 1,
-  },
-
-  addPhotoButton: {
-    color: "#FF6C00",
   },
 
   title: {

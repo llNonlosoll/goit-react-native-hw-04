@@ -1,5 +1,5 @@
 import { Text } from "react-native";
 
 export const CreatePostsScreen = () => {
-  <Text>CreatePostsScreen</Text>;
+  return <Text>CreatePostsScreen</Text>;
 };
