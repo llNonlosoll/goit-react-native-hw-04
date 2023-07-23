@@ -1,5 +1,5 @@
-import { Text } from "react-native";
+import { BottomTabComponent } from "../components/BottomTabComponent";
 
 export const Home = () => {
-  return <Text>Home</Text>;
+  return <BottomTabComponent />;
 };

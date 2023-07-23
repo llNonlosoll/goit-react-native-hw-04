@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <MainStack.Navigator initialRouteName="Registration">
+      <MainStack.Navigator initialRouteName="Login">
         <MainStack.Screen
           name="Home"
           component={Home}
@@ -43,18 +43,6 @@ export default function App() {
             headerShown: false,
           }}
         />
-        {/* <MainStack.Screen
-          name="Comments"
-          component={CommentsScreen}
-          options={{
-            title: "Коментарі",
-            headerShown: true,
-            headerLeft: () => <BackButton />,
-            headerStyle: {
-              borderBottomWidth: 1,
-            },
-          }}
-        /> */}
       </MainStack.Navigator>
     </NavigationContainer>
   );
