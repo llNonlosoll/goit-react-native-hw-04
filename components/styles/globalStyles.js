@@ -24,7 +24,30 @@ export const globalStyles = StyleSheet.create({
     textAlign: "center",
 
     fontFamily: "Roboto-Regular",
+    fontWeight: 400,
+    fontSize: 16,
+    lineHeight: 18.75,
 
     color: "white",
+  },
+
+  disabledButton: {
+    paddingTop: 16,
+    paddingBottom: 16,
+
+    backgroundColor: "#F6F6F6",
+
+    borderRadius: 100,
+  },
+
+  disabledButtonText: {
+    textAlign: "center",
+
+    fontFamily: "Roboto-Regular",
+    fontWeight: 400,
+    fontSize: 16,
+    lineHeight: 18.75,
+
+    color: "#BDBDBD",
   },
 });

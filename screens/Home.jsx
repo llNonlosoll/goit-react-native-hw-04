@@ -77,6 +77,7 @@ export const Home = () => {
           headerStyle: {
             borderBottomWidth: 1,
           },
+          tabBarStyle: { display: "none" },
         }}
       />
       <Tabs.Screen
