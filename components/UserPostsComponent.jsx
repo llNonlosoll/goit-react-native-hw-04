@@ -1,6 +1,6 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-
 import { useNavigation } from "@react-navigation/native";
+
+import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 import { CommentIcon, LikeIcon, LocationIcon } from "../components/icons/icons";
 
@@ -13,8 +13,8 @@ export const UserPostsComponent = ({
 }) => {
   const navigation = useNavigation();
 
-  const handleCommentsRedirect = () => {
-    navigation.navigate("Comments");
+  const handleCommentsRedirect = (way) => {
+    navigation.navigate("Comments", { way: way });
   };
 
   return (
@@ -30,7 +30,7 @@ export const UserPostsComponent = ({
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <View style={{ flexDirection: "row", gap: 24 }}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-            <TouchableOpacity onPress={handleCommentsRedirect}>
+            <TouchableOpacity onPress={() => handleCommentsRedirect(way)}>
               <CommentIcon fill="#FF6C00" stroke="#FF6C00" />
             </TouchableOpacity>
 
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
 
   name: {
     marginBottom: 8,
+
     fontFamily: "Roboto-Medium",
     fontSize: 16,
     lineHeight: 18.75,

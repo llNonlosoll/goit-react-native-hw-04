@@ -2,14 +2,15 @@ import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import {
-  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableWithoutFeedback,
+  StyleSheet,
 } from "react-native";
 
 import { globalStyles } from "../components/styles/globalStyles";
@@ -25,6 +26,10 @@ export const LoginScreen = () => {
   const navigation = useNavigation();
 
   const handleSubmit = () => {
+    if (email === "" || password === "") {
+      return;
+    }
+
     console.log({ email, password });
 
     navigation.navigate("Home");
