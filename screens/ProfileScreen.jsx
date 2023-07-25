@@ -11,17 +11,16 @@ import { BackgroundComponent } from "../components/BackgroundComponent";
 import { UserPostsComponent } from "../components/UserPostsComponent";
 import { LogoutButtonComponent } from "../components/LogoutButtonComponent";
 
-import { LogoutIcon, DeleteIcon } from "../components/icons/icons";
+import { DeleteIcon } from "../components/icons/icons";
 
 export const ProfileScreen = () => {
   return (
     <BackgroundComponent>
-      {/* <ScrollView style={{ flex: 1 }} > */}
       <View style={styles.wrapper}>
         <TouchableOpacity style={{ position: "absolute", right: 16, top: 22 }}>
           <LogoutButtonComponent />
         </TouchableOpacity>
-        <View style={styles.photoWrapper}>
+        <View style={styles.photoContainer}>
           <Image source={require("../components/images/userProfile.png")} />
           <TouchableOpacity style={styles.deletePhotoButton}>
             <DeleteIcon />
@@ -58,43 +57,56 @@ export const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingLeft: 16,
-    paddingRight: 16,
+    alignContent: "flex-end",
+
     height: "80%",
     width: "100%",
+
+    paddingLeft: 16,
+    paddingRight: 16,
+
     backgroundColor: "white",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
-    alignContent: "flex-end",
   },
-  photoWrapper: {
-    width: 120,
-    height: 120,
+
+  photoContainer: {
     position: "absolute",
-    backgroundColor: "#F6F6F6",
-    borderRadius: 16,
     top: -60,
     left: "50%",
     transform: [{ translateX: -60 }],
+
+    width: 120,
+    height: 120,
+
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
   },
+
   deletePhotoButton: {
     position: "absolute",
+    top: 81,
+    right: -12.5,
+
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
+
     width: 25,
     height: 25,
+
     borderColor: "#E8E8E8",
     backgroundColor: "white",
     borderRadius: 12.5,
     borderWidth: 1,
-    top: 81,
-    right: -12.5,
   },
+
   text: {
     marginTop: 92,
     marginBottom: 32,
+
     textAlign: "center",
     fontFamily: "Roboto-Medium",
     fontSize: 30,

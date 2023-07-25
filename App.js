@@ -6,6 +6,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { LoginScreen } from "./screens/LoginScreen";
 import { RegistrationScreen } from "./screens/RegistrationScreen";
 import { Home } from "./screens/Home";
+import { CommentsScreen } from "./screens/CommentsScreen";
+
+import { BackButtonComponent } from "./components/BackButtonComponent";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -41,6 +44,19 @@ export default function App() {
           component={LoginScreen}
           options={{
             headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="Comments"
+          component={CommentsScreen}
+          options={{
+            title: "Коментарі",
+            headerTitleAlign: "center",
+            headerShown: true,
+            headerLeft: () => <BackButtonComponent />,
+            headerStyle: {
+              borderBottomWidth: 1,
+            },
           }}
         />
       </MainStack.Navigator>

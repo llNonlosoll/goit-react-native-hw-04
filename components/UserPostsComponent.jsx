@@ -1,5 +1,7 @@
-import { Image, StyleSheet, Text } from "react-native";
-import { View } from "react-native";
+import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+
+import { useNavigation } from "@react-navigation/native";
+
 import { CommentIcon, LikeIcon, LocationIcon } from "../components/icons/icons";
 
 export const UserPostsComponent = ({
@@ -9,6 +11,12 @@ export const UserPostsComponent = ({
   commentsNumber,
   likes,
 }) => {
+  const navigation = useNavigation();
+
+  const handleCommentsRedirect = () => {
+    navigation.navigate("Comments");
+  };
+
   return (
     <View style={{ marginBottom: 32 }}>
       <View style={{ marginBottom: 8 }}>
@@ -22,7 +30,10 @@ export const UserPostsComponent = ({
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <View style={{ flexDirection: "row", gap: 24 }}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-            <CommentIcon fill="#FF6C00" stroke="#FF6C00" />
+            <TouchableOpacity onPress={handleCommentsRedirect}>
+              <CommentIcon fill="#FF6C00" stroke="#FF6C00" />
+            </TouchableOpacity>
+
             <Text
               style={[
                 styles.text,
