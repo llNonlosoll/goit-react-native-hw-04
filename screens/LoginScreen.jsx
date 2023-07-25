@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
-  ImageBackground,
   TouchableWithoutFeedback,
 } from "react-native";
 
