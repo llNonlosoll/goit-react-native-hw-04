@@ -158,12 +158,16 @@ const styles = StyleSheet.create({
   },
 
   bottomContainer: {
-    width: 70,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "#F6F6F6",
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
+
+    width: 70,
+    height: 40,
+
+    backgroundColor: "#F6F6F6",
+
+    borderRadius: 20,
   },
 });
